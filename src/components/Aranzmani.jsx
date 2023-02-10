@@ -1,14 +1,14 @@
 import React from 'react'
 import JedanAranzman from './JedanAranzman'
 
-const Aranzmani = () => {
+const Aranzmani = ({ aranzmani, Dodaj }) => {
+  
+
   return (
     <div className='all-products'>
-      <JedanAranzman />
-      <JedanAranzman />
-      <JedanAranzman />
-      <JedanAranzman />
-      <JedanAranzman />
+      {
+        aranzmani.map((arr) => ( <JedanAranzman aranzman = {arr} key = {arr.id} Dodaj = { Dodaj }/> ))
+      };
     </div>
   )
 }
