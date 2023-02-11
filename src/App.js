@@ -9,7 +9,9 @@ import {useState} from "react";
 
 
 function App() {
+  const [ aranzman, setAranzman] = useState();
   const [ zakazani, setZakazani ] = useState([]);
+  const [ zakazani1, setZakazani1 ] = useState([]);
   const [aranzmani, setAranzmani] = useState([
     {
       id: 1,
@@ -18,7 +20,8 @@ function App() {
       opis:"Rim (ital. Roma) je glavni grad Italije i regije Lacio, takođe najveći i najbrojniji grad u Italiji sa oko 2,8 miliona stanovnika",
       brojDana: 6,
       cena: 26000,
-      broj: 0
+      broj: 0,
+      zak: 0
     },
     {
       id: 2,
@@ -27,7 +30,8 @@ function App() {
       opis:"Madrid je glavni grad Kraljevine Španije. Madrid je, kako od nacionalnog, tako i od internacionalnog značaja za trgovinu i finansije i politički je i kulturni centar Španije.",
       brojDana: 5,
       cena: 28000,
-      broj: 0
+      broj: 0,
+      zak: 0
     },{
       id: 3,
       naziv: "Temisvar",
@@ -35,7 +39,8 @@ function App() {
       opis:"Temišvar grad je u Rumuniji. Najveći je grad Banata, leži na reci Begej i sedište je okruga Timiš.",
       brojDana: 2,
       cena: 6800,
-      broj: 0
+      broj: 0,
+      zak: 0
     },{
       id: 4,
       naziv: "Bec",
@@ -43,7 +48,8 @@ function App() {
       opis: "Grad leži na Dunavu u najistočnijem delu Austrije nedaleko od granice sa Slovačkom, Mađarskom i Češkom.",
       brojDana: 5,
       cena: 19000,
-      broj: 0
+      broj: 0,
+      zak: 0
     },{
       id: 5,
       naziv: "Moskva",
@@ -51,7 +57,8 @@ function App() {
       opis: "Moskva glavni je i najveći grad Rusije i najveći grad u Evropi. Nalazi se na reci Moskvi i obuhvata površinu od 2561,5 km². ",
       brojDana: 4,
       cena: 24000,
-      broj: 0
+      broj: 0,
+      zak: 0
     },
   ])
 
@@ -65,6 +72,16 @@ function App() {
     setZakazani(noviNiz);
   }
   
+  function Dodaj1(  id ){
+    aranzmani.forEach((arr) => {
+      if(arr.id === id){
+        arr.zak = 1;
+      }
+    });
+    let noviNiz = aranzmani.filter((arr) => arr.zak ===1);
+    setZakazani1(noviNiz);
+  }
+  
   function Obrisi( id ){
     aranzmani.forEach((arr) => {
       if(arr.id === id){
@@ -75,17 +92,28 @@ function App() {
     setZakazani(noviNiz);
   }
 
+  function Obrisi1( id ){
+    aranzmani.forEach((arr) => {
+      if(arr.id === id){
+        arr.zak = 0;
+      }
+    });
+    let noviNiz = aranzmani.filter((arr) => arr.zak ===1);
+    setZakazani1(noviNiz);
+  }
+
+
   return (
     <BrowserRouter className="App">
       <NavBar />
       <Routes>
         <Route 
         path = "/"
-        element = { <Aranzmani aranzmani ={ aranzmani } /> }
+        element = { <Aranzmani aranzmani ={ aranzmani }/> }
          />
          <Route
          path = "/rezervacije"
-         element = { <Rezervacije aranzmani = { zakazani } Obrisi = { Obrisi }  /> }
+         element = { <Rezervacije aranzmani = { zakazani }  aranzmani1 = { zakazani1 } Obrisi = { Obrisi } Obrisi1 = { Obrisi1 }  /> }
           />
           <Route
          path = "/zakaziAvion"
@@ -93,7 +121,7 @@ function App() {
           />
           <Route
          path = "/zakaziBus"
-         element = { <ZakaziBus aranzmani = { aranzmani } Dodaj = { Dodaj } /> }
+         element = { <ZakaziBus aranzmani = { aranzmani } Dodaj = { Dodaj1 }  /> }
           />
       </Routes>
 
