@@ -4,7 +4,7 @@ import JedanAranzman from './JedanAranzman'
 
 const ZakaziAvion = ({ aranzmani, Dodaj }) => {
   return (
-    <div>{
+    <div className='avion'>{
       aranzmani.map((arr) => ( <>
         <JedanAranzman aranzman = {arr} key = {arr.id} Dodaj = {Dodaj} rez = {3} />
         </>))};
